@@ -22,12 +22,12 @@ const Input = styled(Field)`
 export class ContactForm extends Component {
 
   state ={
-id: nanoid(3),
 name: '',
 number:'',
   }
 
-
+  nameInputId = nanoid(3);
+  numberInputId=nanoid(3);
 
   // handleSubmit = (values, { resetForm }) => {
   //   console.log(values);
@@ -77,7 +77,7 @@ render(){
       // onSubmit={handleSubmit}
     >
       <Form autoComplete="off" onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
+        <label htmlFor={this.nameInputId}>
           Name
           <Input
           value={this.state.name}
@@ -87,11 +87,11 @@ render(){
   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
   required
-  id={this.state.id}
+  id={this.nameInputId}
 />
           <ErrorMessage name="name" component="div" />
         </label>
-        <label htmlFor="number">
+        <label htmlFor={this.numberInputId}>
           Number 
           <Input
            value={this.state.number}
@@ -101,6 +101,7 @@ render(){
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
   required
+  id={this.numberInputId}
 />
           {/* <ErrorMessage name="number" component="div" /> */}
         </label>
