@@ -52,6 +52,12 @@ const normilezedFilter=filter.toLowerCase();
     contact.name.toLowerCase().includes(normilezedFilter));
 };
 
+deleteContact = contactId => {
+  this.setState(prevState => ({
+    contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+  }));
+};
+
   render() {
 
 // const normilezedFilter=this.state.filter.toLowerCase();
@@ -68,9 +74,7 @@ const filteredContacts=this.getFilteredContacts();
 
         <h2>Contacts</h2>
           <Filter value={this.state.filter} onChange={this.changeFilter}/>
-          <ContactList options={filteredContacts}  />
-       
-        
+          <ContactList options={filteredContacts} onDeleteContact={this.deleteContact} />
       </>
     );
   }
