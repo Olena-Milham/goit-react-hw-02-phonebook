@@ -15,6 +15,11 @@ import {Component} from 'react';
 //     contacts: [{name:'', id: '',}],
 // };
 
+// const initialValues={
+//   name: '',
+//  number:'',
+//    }
+
 const Input = styled(Field)`
   color: #2a2a2a;
 `;
@@ -25,6 +30,7 @@ export class ContactForm extends Component {
 name: '',
 number:'',
   }
+
 
   // nameInputId = nanoid(3);
   // numberInputId=nanoid(3);
