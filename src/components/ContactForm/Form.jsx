@@ -1,8 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
 import * as yup from 'yup';
-// import { nanoid } from 'nanoid';
-// import {Component} from 'react';
+
 
 const schema = yup.object.shape({
     name:yup.string().required('Please enter your name'),
@@ -18,12 +17,6 @@ const Input = styled(Field)`
   color: #2a2a2a;
 `;
 
-export const ContactForm = ()=> {
-const handleSubmit =(values, {resetForm})=>{
-    console.log(values);
-    // console.log(actions);//{resetForm}
-    resetForm();
-}
 const ErrorText = styled.p`
   color: red;
 `;
@@ -35,6 +28,14 @@ const FormError = ({name})=>{
         />
       );
 
+}
+
+export const ContactForm = ({onSubmit})=> {
+const handleSubmit =(values, {resetForm})=>{
+    console.log(values);
+    // console.log(actions);//{resetForm}
+    // resetForm();
+    if (onSubmit(values)) resetForm();
 }
 
   return (

@@ -1,9 +1,10 @@
 
-import {ContactForm} from 'components/ContactForm';
+// import {ContactForm} from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import {Component} from 'react';
 import { nanoid } from 'nanoid';
+import { Form } from 'formik';
 //  import { Formik } from 'formik';
 // import * as yup from 'yup';
 
@@ -18,31 +19,55 @@ export class App extends Component {
     filter: '',
   }
 
-  changeFilter=(e)=>{
-this.setState({filter: e.currentTarget.value});
-  }
+// For Form 
+  handleSubmit = values => {
+    const name = values.name;
+    const names = this.state.contacts.map(contact => contact.name);
 
+    if (!names.includes(name)) {
+      const newContact = {
+        id: nanoid(3),
+        name,
+        number: values.number,
+      };
+      this.setState({
+        contacts: [...this.state.contacts, newContact],
+      });
+      return true; 
+    }
+    alert(`${name} is already in contacts`);
+    return false;
+  };
+
+// =======
 // formSubmitHandler =data=>{
 //   console.log(data);
 // }
 
+// ******* For ContactForm
+// addContact = ({name, number})=>{
+// const contact={
+// id:nanoid(3),
+// name,
+// number,
+// };
 
-addContact = ({name, number})=>{
-const contact={
-id:nanoid(3),
-name,
-number,
-};
+// without destructarization 
+// // this.setState(prevState=>({
+// //   contacts:[contact,...prevState.contacts],
+// // }))
 
-// this.setState(prevState=>({
-//   contacts:[contact,...prevState.contacts],
-// }))
+// this.setState(({contacts})=>({
+//   contacts:[contact,...contacts],
+// }));
 
-this.setState(({contacts})=>({
-  contacts:[contact,...contacts],
-}));
+// };
 
-};
+// *****
+
+changeFilter=(e)=>{
+  this.setState({filter: e.currentTarget.value});
+    }
 
 getFilteredContacts =()=>{
 const {filter, contacts}=this.state;
@@ -50,6 +75,7 @@ const {filter, contacts}=this.state;
 const normilezedFilter=filter.toLowerCase();
   return contacts.filter(contact=>
     contact.name.toLowerCase().includes(normilezedFilter));
+
 };
 
 deleteContact = contactId => {
@@ -60,16 +86,15 @@ deleteContact = contactId => {
 
   render() {
 
-// const normilezedFilter=this.state.filter.toLowerCase();
-// const filteredContacts=this.state.contacts.filter(contact=>
-//   contact.name.toLowerCase().includes(normilezedFilter));
+
 
 const filteredContacts=this.getFilteredContacts();
 
     return (
       <>
       <h1> Phonebook</h1>
-        <ContactForm onSubmit={this.addContact}/>
+        {/* <ContactForm onSubmit={this.addContact}/> */}
+        <Form onSubmit={this.handleSubmit}/>
         
 
         <h2>Contacts</h2>
@@ -81,3 +106,8 @@ const filteredContacts=this.getFilteredContacts();
 };
 
 // onSubmit={this.formSubmitHandler}
+
+// without distructurization
+// const normilezedFilter=this.state.filter.toLowerCase();
+// const filteredContacts=this.state.contacts.filter(contact=>
+//   contact.name.toLowerCase().includes(normilezedFilter));
