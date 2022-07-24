@@ -4,7 +4,7 @@ import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import {Component} from 'react';
 import { nanoid } from 'nanoid';
-import { Form } from 'formik';
+import {ContactForm} from 'components/ContactForm/Form'
 //  import { Formik } from 'formik';
 // import * as yup from 'yup';
 
@@ -94,7 +94,7 @@ const filteredContacts=this.getFilteredContacts();
       <>
       <h1> Phonebook</h1>
         {/* <ContactForm onSubmit={this.addContact}/> */}
-        <Form onSubmit={this.handleSubmit}/>
+        <ContactForm onSubmit={this.handleSubmit}/>
         
 
         <h2>Contacts</h2>

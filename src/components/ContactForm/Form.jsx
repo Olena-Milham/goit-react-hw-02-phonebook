@@ -6,7 +6,7 @@ import * as yup from 'yup';
 const schema = yup.object.shape({
     name:yup.string().required('Please enter your name'),
     number: yup.string().min(5).max(13).required('Phone number is required'),
-})
+});
 
 const initialValues={
   name: '',
