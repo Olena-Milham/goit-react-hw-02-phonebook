@@ -1,17 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import * as yup from 'yup';
 
-
-const schema = yup.object.shape({
-    name:yup.string().required('Please enter your name'),
-    number: yup.string().min(5).max(13).required('Phone number is required'),
+const schema = yup.object().shape({
+  name: yup.string().required('Please enter your name'),
+  number: yup.string().min(5).max(13).required('Phone number is required'),
 });
 
-const initialValues={
+const initialValues = {
   name: '',
- number:'',
-   }
+  number: '',
+};
 
 const Input = styled(Field)`
   color: #2a2a2a;
@@ -20,23 +20,21 @@ const Input = styled(Field)`
 const ErrorText = styled.p`
   color: red;
 `;
-const FormError = ({name})=>{
-    return (
-        <ErrorMessage
-          name={name}
-          render={message => <ErrorText>{message}</ErrorText>}
-        />
-      );
+const FormError = ({ name }) => {
+  return (
+    <ErrorMessage
+      name={name}
+      render={message => <ErrorText>{message}</ErrorText>}
+    />
+  );
+};
 
-}
-
-export const ContactForm = ({onSubmit})=> {
-const handleSubmit =(values, {resetForm})=>{
+export const ContactForm = ({ onSubmit }) => {
+  const handleSubmit = (values, { resetForm }) => {
     console.log(values);
     // console.log(actions);//{resetForm}
-    // resetForm();
     if (onSubmit(values)) resetForm();
-}
+  };
 
   return (
     <Formik
@@ -44,36 +42,43 @@ const handleSubmit =(values, {resetForm})=>{
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <Form autoComplete="off" onSubmit={this.handleSubmit}>
-        <label htmlFor='name'>
-          Name
-          <Input
-  type="text"
-  name="name"
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  required
-  id='name'
-/>
+      <Form autoComplete="off">
+        <div>
+          <label htmlFor="name">Name</label>
+          <div>
+            <Input
+              type="text"
+              name="name"
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              id="name"
+            />
+            {/* ErrorMassage=FormError */}
+            <FormError name="name" component="div" />
+          </div>
+        </div>
 
-{/* ErrorMassage=FormError */}
-          <FormError name="name" component="div" />
-        </label>
-        <label htmlFor='name'>
-          Number 
-          <Input      
-  type="tel"
-  name="number"
-  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  required
-  id='number'
-/>
-          <FormError name="number" component="div" />
-
-        </label>
+        <div>
+          <label htmlFor="name">Number</label>
+          <div>
+            <Input
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+              id="number"
+            />
+            <FormError name="number" component="div" />
+          </div>
+        </div>
         <button type="submit">Add contact</button>
       </Form>
     </Formik>
-  );  
+  );
+};
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
