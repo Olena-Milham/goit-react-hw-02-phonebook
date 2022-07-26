@@ -1,13 +1,13 @@
 import { Item } from './Item/Item';
 import PropTypes from 'prop-types';
+import { List } from './ContactList.styled';
 
 export const ContactList = ({ options, onDeleteContact }) => (
-  <ul options={options}>
+  <List options={options}>
     {options.map(item => (
       <Item item={item} key={item.id} onDeleteContact={onDeleteContact} />
     ))}
-    ;
-  </ul>
+  </List>
 );
 
 ContactList.propTypes = {

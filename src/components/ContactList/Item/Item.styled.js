@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
-export const FormBtn = styled.button`
+export const ListEl = styled.li`
+  margin-top: ${p => p.theme.space[0]}px;
+  margin-bottom: ${p => p.theme.space[4]}px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${p => p.theme.space[3]}px;
+`;
+
+export const ListBtn = styled.button`
   display: inline-flex;
   padding-top: ${p => p.theme.space[3]}px;
   padding-bottom: ${p => p.theme.space[3]}px;
@@ -19,4 +28,8 @@ export const FormBtn = styled.button`
   :focus:not(:disabled) {
     background-color: ${p => p.theme.colors.secondary};
   }
+`;
+
+export const Name = styled.span`
+  margin-right: ${p => p.theme.space[2]}px; ;
 `;

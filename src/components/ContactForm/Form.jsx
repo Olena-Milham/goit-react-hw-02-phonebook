@@ -2,6 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import * as yup from 'yup';
+import { FormBtn } from './Form.styled';
+// import { FormFields } from './Form.styled';
 
 const schema = yup.object().shape({
   name: yup.string().required('Please enter your name'),
@@ -14,7 +16,20 @@ const initialValues = {
 };
 
 const Input = styled(Field)`
-  color: #2a2a2a;
+  color: ${p => p.theme.colors.text};
+  padding: ${p => p.theme.space[2]}px;
+  margin-top: ${p => p.theme.space[2]}px;
+  margin-bottom: ${p => p.theme.space[2]}px;
+`;
+
+const FormFields = styled(Form)`
+  margin-top: ${p => p.theme.space[0]}px;
+  margin-bottom: ${p => p.theme.space[5]}px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: ${p => p.theme.space[4]}px;
 `;
 
 const ErrorText = styled.p`
@@ -42,7 +57,7 @@ export const ContactForm = ({ onSubmit }) => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <Form autoComplete="off">
+      <FormFields autoComplete="off">
         <div>
           <label htmlFor="name">Name</label>
           <div>
@@ -52,6 +67,7 @@ export const ContactForm = ({ onSubmit }) => {
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
+              placeholder="Add a new contact"
               id="name"
             />
             {/* ErrorMassage=FormError */}
@@ -68,13 +84,14 @@ export const ContactForm = ({ onSubmit }) => {
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
+              placeholder="Add a phone number"
               id="number"
             />
             <FormError name="number" component="div" />
           </div>
         </div>
-        <button type="submit">Add contact</button>
-      </Form>
+        <FormBtn type="submit">Add contact</FormBtn>
+      </FormFields>
     </Formik>
   );
 };

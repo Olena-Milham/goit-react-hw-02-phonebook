@@ -4,6 +4,8 @@ import { Filter } from 'components/Filter';
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm/Form';
+import { Box } from 'components/ui/Box';
+import { Section } from 'components/ui/Section';
 
 export class App extends Component {
   state = {
@@ -59,16 +61,27 @@ export class App extends Component {
 
     return (
       <>
-        <h1> Phonebook</h1>
-        {/* <ContactForm onSubmit={this.addContact}/> */}
-        <ContactForm onSubmit={this.handleSubmit} />
+        <Box
+          width="460px"
+          margin="0 auto"
+          display="flex"
+          flexDirection="column"
+          as="section"
+        >
+          <Section title="Phonebook">
+            {/* <h1> Phonebook</h1> */}
+            {/* <ContactForm onSubmit={this.addContact}/> */}
+            <ContactForm onSubmit={this.handleSubmit} />
+          </Section>
 
-        <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <ContactList
-          options={filteredContacts}
-          onDeleteContact={this.deleteContact}
-        />
+          <Section title="Contacts">
+            <Filter value={this.state.filter} onChange={this.changeFilter} />
+            <ContactList
+              options={filteredContacts}
+              onDeleteContact={this.deleteContact}
+            />
+          </Section>
+        </Box>
       </>
     );
   }
