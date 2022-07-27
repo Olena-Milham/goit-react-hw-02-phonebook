@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import { FormBtn } from './Form.styled';
-// import { FormFields } from './Form.styled';
 
 const schema = yup.object().shape({
   name: yup.string().required('Please enter your name'),

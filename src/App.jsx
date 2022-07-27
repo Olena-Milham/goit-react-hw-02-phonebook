@@ -69,7 +69,6 @@ export class App extends Component {
           as="section"
         >
           <Section title="Phonebook">
-            {/* <h1> Phonebook</h1> */}
             {/* <ContactForm onSubmit={this.addContact}/> */}
             <ContactForm onSubmit={this.handleSubmit} />
           </Section>
@@ -89,16 +88,15 @@ export class App extends Component {
 
 // =================== My Notes =====================
 // onSubmit={this.formSubmitHandler}
+// =======
+// formSubmitHandler =data=>{
+//   console.log(data);
+// }
 
 // without distructurization
 // const normilezedFilter=this.state.filter.toLowerCase();
 // const filteredContacts=this.state.contacts.filter(contact=>
 //   contact.name.toLowerCase().includes(normilezedFilter));
-
-// =======
-// formSubmitHandler =data=>{
-//   console.log(data);
-// }
 
 // ******* For ContactForm
 // addContact = ({name, number})=>{
